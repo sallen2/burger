@@ -1,34 +1,53 @@
-const con = require('../config/connection')
+const con = require("../config/connection");
 
 const orm = {
-    create: val =>{
-        return new Promise((reject, resolve)=>{
-            con.query('INSERT INTO burger SET ?',{
-                burger_name: val,
-                devour: true
-            },(err,resp)=>{
-                if(err) reject(err)
-                resolve('Created!')
-            })
-        })
-    },
-    read: ()=>{
-        return new Promise((reject,resolve)=>{
-            con.query('SELECT * FROM burger',(err,resp)=>{
-                if(err) reject(err)
-                resolve(resp)
-            })
-        })
-    },
-    update: val =>{
-        return new Promise((reject,resolve)=>{
-            con.query('UPDATE burger WHERE ?',
-            {
-                burger_name: val
-            },(err,resp)=>{
-                if(err) reject(err)
-                resolve(`update! ${resp}`)
-            })
-        })
-    }
-}
+  create: (name,val) => {
+    return new Promise((reject, resolve) => {
+      con.query(
+        "INSERT INTO burger SET ?",
+        {
+          [name]: val,
+          devour: false
+        },
+        (err, resp) => {
+          if (err) reject(err);
+          resolve("Created!");
+        }
+      );
+    });
+  },
+  read: val => {
+    return new Promise((reject, resolve) => {
+      con.query(`SELECT ${val} FROM burger`, (err, resp) => {
+        if (err) reject(err);
+        resolve(resp);
+      });
+    });
+  },
+  update: (table,colName,idName,val,val2) => {
+    return new Promise((reject, resolve) => {
+      con.query(
+        `UPDATE ${table} SET ${colName}= ${val} WHERE ?`,{
+          [idName]: val2
+        },
+        (err, resp) => {
+          if (err) reject(err);
+          resolve(`Updated!`);
+        }
+      );
+    });
+  },
+  delete: (val, table) => {
+    return new Promise((reject, resolve) => {
+      con.query(
+        `DELETE FROM ${table} WHERE burger_name = ${val}`,
+        (err, res) => {
+            if(err) reject(err)
+            resolve('Deleted!')
+        }
+      );
+    });
+  }
+};
+
+module.exports = orm
