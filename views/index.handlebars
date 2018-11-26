@@ -1,10 +1,9 @@
 <h1 class="center">Welcome to Burger Creator!</h1>
 
-
 <div class="section1 container">
     <div class="text-center row">
-        <div class="col-md-6">
-            <h1>BURGERS NOT ATE</h1>
+        <div class="col-md-4">
+            <h1>BURGERS NOT IN MY BELLY!</h1>
             <ul>
                 {{#each burgers}}
                 {{#unless devour}}
@@ -13,9 +12,11 @@
                 {{/each}}
             </ul>
         </div>
-
-        <div class="col-md-6">
-            <h1>BURGERS ATE</h1>
+        <div class='col-md-4'>
+            <img src="/assets/images/cartoonToonBurger.png" style="width:200px; height:300px;" alt="Burger Toon">
+        </div>
+        <div class="col-md-4">
+            <h1>BURGERS IN MY BELLY!</h1>
             <ul>
                 {{#each burgers}}
                 {{#if devour}}
@@ -29,5 +30,9 @@
 
 <h3 class="center">Create your burger here</h3>
 <form class="center" action="/" method="POST">
-    <input name="burgerName" type="text">
+    <div class="row">
+        <div class="col-xs-3">
+            <input class='inputMargin form-control' name="burgerName" type="text">
+        </div>
+    </div>
 </form>
