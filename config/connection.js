@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const fs = require('fs');
 
+console.log(__dirname);
 const con = mysql.createConnection({
   host: process.env.DB_HOST,
   port: 3306,
