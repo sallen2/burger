@@ -15,6 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/', burger);
 
-app.listen(8080, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log('server up on port 8080.');
 });
